@@ -4,56 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tournoi Pokémon</title>
+    <!-- Lien vers GSAP via CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <!-- Lien vers PicoCSS via CDN -->
     <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.5.7/css/pico.min.css">
+    <!-- Lien vers Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
     <header>
-        <h1>Résultats du Tournoi Pokémon</h1>
+        <h1>Tour {{ round.round_number }} du Tournoi Pokémon</h1>
     </header>
 
     <main>
-        {% for round in rounds %}
-            <article>
-                <h2>Tour {{ round.round_number }}</h2>
-                <div class="grid">
-                    {% for battle in round.battles %}
-                        <div class="card">
-                            <header>
-                                <h3 class="centered">Combat {{ loop.index }}</h3>
-                            </header>
-                            <div class="grid">
-                                <div class="card pokemon-card">
-                                    <img src="{{ battle.pokemon1_img }}" alt="{{ battle.pokemon1 }}" style="width: 100px;">
-                                    <p>{{ battle.pokemon1 }}</p>
-                                </div>
-                                <p>VS</p>
-                                <div class="card pokemon-card">
-                                    <img src="{{ battle.pokemon2_img }}" alt="{{ battle.pokemon2 }}" style="width: 100px;">
-                                    <p>{{ battle.pokemon2 }}</p>
-                                </div>
+        <article>
+            <div class="grid">
+                {% for battle in round.battles %}
+                    <div class="card pokemon-card">
+                        <header>
+                            <h3>Combat {{ loop.index }}</h3>
+                        </header>
+                        <div class="pokemon-battle">
+                            <div>
+                                <img src="{{ battle.pokemon1_img }}" alt="{{ battle.pokemon1 }}" style="width: 100px;">
+                                <p>{{ battle.pokemon1 }}</p>
                             </div>
-                            <footer>
-                                <p class="centered">Vainqueur : <strong>{{ battle.winner }}</strong></p>
-                            </footer>
+                            <p class="vs-text">
+                                <i class="fas fa-bolt vs-icon"></i>
+                            </p>
+                            <div>
+                                <img src="{{ battle.pokemon2_img }}" alt="{{ battle.pokemon2 }}" style="width: 100px;">
+                                <p>{{ battle.pokemon2 }}</p>
+                            </div>
                         </div>
-                    {% endfor %}
-                </div>
-            </article>
-        {% endfor %}
-
-        <article class="centered">
-            <h2>Champion : {{ champion['name'] }}</h2>
-            <img src="{{ champion['sprites']['front_default'] }}" alt="{{ champion['name'] }}" style="width: 150px;">
+                        <footer>
+                            <p>
+                                <i class="fas fa-trophy"></i><!-- Icône de trophée -->
+                                <br>
+                                <strong>{{ battle.winner }}</strong>
+                            </p>
+                        </footer>
+                    </div>
+                {% endfor %}
+            </div>
         </article>
-        <a href="/">
-            <button>Démarrer un nouveau Tournoi</button>
-        </a>
+
+        <div class="pagination">
+            <!-- Bouton pour revenir au tour précédent, désactivé si c'est le premier tour -->
+            {% if round_number > 1 %}
+                <a href="/tournament/{{ round_number - 1 }}">
+                    <button>Tour précédent</button>
+                </a>
+            {% else %}
+                <button disabled>Tour précédent</button>
+            {% endif %}
+
+            <!-- Bouton pour aller au tour suivant, désactivé si c'est le dernier tour -->
+            {% if round_number < total_rounds %}
+                <a href="/tournament/{{ round_number + 1 }}">
+                    <button>Tour suivant</button>
+                </a>
+            {% else %}
+                <a href="/tournament/{{ total_rounds + 1 }}">
+                    <button>Voir le champion</button>
+                </a>
+            {% endif %}
+        </div>
     </main>
 
     <footer>
-        <p>Fait avec PicoCSS</p>
     </footer>
+    <script>
+        // Animation GSAP pour l'apparition des cartes de Pokémon
+        gsap.from(".pokemon-card", {
+            opacity: 0,
+            scale: 0.5,
+            duration: 0.5,
+            stagger: 0.2
+        });
+    </script>
+
 </body>
 </html>
