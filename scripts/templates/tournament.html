@@ -21,21 +21,21 @@
                     {% for battle in round.battles %}
                         <div class="card">
                             <header>
-                                <h3>Combat {{ loop.index }}</h3>
+                                <h3 class="centered">Combat {{ loop.index }}</h3>
                             </header>
                             <div class="grid">
-                                <div>
+                                <div class="card pokemon-card">
                                     <img src="{{ battle.pokemon1_img }}" alt="{{ battle.pokemon1 }}" style="width: 100px;">
                                     <p>{{ battle.pokemon1 }}</p>
                                 </div>
                                 <p>VS</p>
-                                <div>
+                                <div class="card pokemon-card">
                                     <img src="{{ battle.pokemon2_img }}" alt="{{ battle.pokemon2 }}" style="width: 100px;">
                                     <p>{{ battle.pokemon2 }}</p>
                                 </div>
                             </div>
                             <footer>
-                                <p>Vainqueur : <strong>{{ battle.winner }}</strong></p>
+                                <p class="centered">Vainqueur : <strong>{{ battle.winner }}</strong></p>
                             </footer>
                         </div>
                     {% endfor %}
@@ -43,7 +43,7 @@
             </article>
         {% endfor %}
 
-        <article>
+        <article class="centered">
             <h2>Champion : {{ champion['name'] }}</h2>
             <img src="{{ champion['sprites']['front_default'] }}" alt="{{ champion['name'] }}" style="width: 150px;">
         </article>

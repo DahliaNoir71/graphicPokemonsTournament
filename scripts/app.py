@@ -104,7 +104,8 @@ def tournament():
 
     :return: A rendered HTML template for the tournament, showing all rounds and the champion.
     """
-    pokemons = get_random_pokemons()  # Obtenons les Pokémon aléatoires
+    global participants
+    pokemons = participants
     rounds = []
     round_number = 1
 
