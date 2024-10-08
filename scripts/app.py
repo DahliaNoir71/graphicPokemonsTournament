@@ -124,6 +124,7 @@ def index():
     return render_template('participants.html', pokemons=selected_pokemons)
 
 
+
 @app.route('/tournament/<int:round_number>')
 def tournament(round_number):
     """
