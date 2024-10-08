@@ -2,7 +2,7 @@
 
 ## Description
 
-Cette application affiche une liste des Pokémon combattants avec une interface utilisateur stylisée utilisant PicoCSS et animations fournies par GSAP. Elle permet également de démarrer un tournoi Pokémon à partir de la liste affichée.
+Cette application simule un tournoi de Pokémons récupérés par consommation d'API avec une interface utilisateur stylisée utilisant PicoCSS et animations fournies par GSAP.
 
 ## Fonctionnalités
 
@@ -48,3 +48,4 @@ Cette application affiche une liste des Pokémon combattants avec une interface 
     ```
 
 2. Ouvrez votre navigateur et accédez à l'adresse suivante :
+   http://127.0.0.1:5000
