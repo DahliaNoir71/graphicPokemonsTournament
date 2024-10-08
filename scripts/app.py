@@ -8,15 +8,20 @@ BASE_URL_API = "https://pokeapi.co/api/v2/"
 URL_POKEMON_API_BASE = "%spokemon" % BASE_URL_API
 NB_PARTICIPANTS = 16
 
-# Variable globale pour stocker les Pokémon sélectionnés
 selected_pokemons = []
 
-# Récupérer un pokémon aléatoire
 def get_random_pokemon_id(pokemons_count):
+    """
+    :param pokemons_count: Total number of available Pokémon
+    :return: A random Pokémon ID between 1 and pokemons_count (inclusive)
+    """
     return random.randint(1, pokemons_count)
 
-# Récupérer les données d'un pokémon
 def fetch_pokemon_data(pokemon_id):
+    """
+    :param pokemon_id: The ID of the Pokémon to fetch data for.
+    :return: A dictionary containing Pokémon data if the request is successful, None otherwise.
+    """
     try:
         url_pokemon = f"{URL_POKEMON_API_BASE}/{pokemon_id}"
         response = requests.get(url_pokemon)
@@ -26,8 +31,12 @@ def fetch_pokemon_data(pokemon_id):
         print(f"Erreur lors de la récupération du Pokémon avec l'ID : {pokemon_id}")
         return None
 
-# Obtenir une liste de pokémons aléatoires
 def get_random_pokemons():
+    """
+    Fetch a list of random Pokémon data.
+
+    :return: A list of dictionaries, each containing data for a random Pokémon
+    """
     pokemons = []
     response = requests.get(URL_POKEMON_API_BASE)
     pokemons_count = response.json()["count"]
@@ -39,14 +48,23 @@ def get_random_pokemons():
             pokemons.append(pokemon_data)
     return pokemons
 
-# Calculer la force d'un pokémon
 def calculate_pokemon_strength(pokemon):
+    """
+    :param pokemon: A dictionary representing a Pokémon, which includes its stats.
+    :type pokemon: dict
+    :return: The total strength value calculated by summing base stats of the Pokémon.
+    :rtype: int
+    """
     stats = pokemon['stats']
     total_strength = sum(stat['base_stat'] for stat in stats)
     return total_strength
 
-# Simuler un combat et déterminer le vainqueur
 def simulate_battle(pokemon1, pokemon2):
+    """
+    :param pokemon1: The first Pokémon participating in the battle.
+    :param pokemon2: The second Pokémon participating in the battle.
+    :return: The Pokémon that wins the simulated battle.
+    """
     strength1 = calculate_pokemon_strength(pokemon1)
     strength2 = calculate_pokemon_strength(pokemon2)
 
@@ -57,8 +75,11 @@ def simulate_battle(pokemon1, pokemon2):
     else:
         return random.choice([pokemon1, pokemon2])
 
-# Simuler un tournoi et stocker les rounds
 def simulate_tournament(pokemons):
+    """
+    :param pokemons: A list of dictionaries where each dictionary contains information about a Pokémon, including its name and sprites.
+    :return: A tuple containing a list of rounds with details of each battle, and the final champion Pokémon.
+    """
     rounds = []
     round_number = 1
 
@@ -91,16 +112,23 @@ def simulate_tournament(pokemons):
 
     return rounds, pokemons[0]  # Retourne les rounds et le champion
 
-# Route principale : Affichage de la liste des combattants
 @app.route('/')
 def index():
+    """
+    Handles the root URL of the application.
+
+    :return: Rendered HTML page with a list of randomly selected Pokémon.
+    """
     global selected_pokemons
     selected_pokemons = get_random_pokemons()  # Obtenir et stocker les Pokémon aléatoires
     return render_template('participants.html', pokemons=selected_pokemons)
 
-# Route pour afficher un tour spécifique
 @app.route('/tournament/<int:round_number>')
 def tournament(round_number):
+    """
+    :param round_number: The current round number to display in the tournament.
+    :return: Rendered HTML template for either the current round of the tournament or the champion if the tournament is complete.
+    """
     global selected_pokemons
     rounds, champion = simulate_tournament(selected_pokemons.copy())  # On passe une copie des pokémons
 
