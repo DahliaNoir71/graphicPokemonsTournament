@@ -6,18 +6,35 @@ body {
     padding: 20px;
 }
 
-/* Grid layout using Flexbox */
+/* Styling for the headers with better readability on a dark background */
+h1, h2, h3, h4, h5, h6 {
+    color: #f0f0f0; /* Cyan lumineux pour un bon contraste */
+    font-weight: bold;
+}
+
+
+/* Flexbox grid for Pokémon list */
 .grid {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Center the cards horizontally */
+    justify-content: center;
     gap: 20px;
 }
 
-/* Styling each combat card */
-.card {
+/* Styling each Pokémon card */
+.pokemon-card {
     background-color: #2a2a2a;
-    border-radius: 15px;
+    border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 20px;
-    width: 400px; /*
+    width: 150px;
+    text-align: center;
+}
+
+.pokemon-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}

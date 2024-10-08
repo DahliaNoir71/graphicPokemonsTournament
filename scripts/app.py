@@ -90,7 +90,8 @@ def index():
 
     :return: Rendered HTML of the index page.
     """
-    return render_template('index.html', nbParticipants=NB_PARTICIPANTS)
+    pokemons = get_random_pokemons()
+    return render_template('index.html', nbParticipants=NB_PARTICIPANTS, pokemons=pokemons)
 
 # Route pour démarrer le tournoi
 @app.route('/tournament')
