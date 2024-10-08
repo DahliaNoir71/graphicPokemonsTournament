@@ -10,19 +10,17 @@ NB_PARTICIPANTS = 16
 
 participants = []
 
-# Récupérer un pokémon aléatoire
 def get_random_pokemon_id(pokemons_count):
     """
-    :param pokemons_count: The total number of available Pokémon, used as the upper bound for generating a random Pokémon ID.
-    :return: A random Pokémon ID within the range of 1 and the given number of Pokémons.
+    :param pokemons_count: Integer representing the total number of possible Pokémon.
+    :return: Integer representing a randomly selected Pokémon ID.
     """
     return random.randint(1, pokemons_count)
 
-# Récupérer les données d'un pokémon
 def fetch_pokemon_data(pokemon_id):
     """
-    :param pokemon_id: ID of the Pokémon to fetch data for
-    :return: JSON response containing Pokémon data if successful, None otherwise
+    :param pokemon_id: The ID of the Pokémon to retrieve data for.
+    :return: A dictionary containing the Pokémon data if the request is successful, or None if an error occurs.
     """
     try:
         url_pokemon = f"{URL_POKEMON_API_BASE}/{pokemon_id}"
@@ -33,16 +31,11 @@ def fetch_pokemon_data(pokemon_id):
         print(f"Erreur lors de la récupération du Pokémon avec l'ID : {pokemon_id}")
         return None
 
-# Obtenir une liste de pokémons aléatoires
 def get_random_pokemons():
     """
-    Fetches a list of random Pokémon data from the Pokémon API.
+    Fetches a list of random pokemons.
 
-    The function makes a request to the Pokémon API to retrieve the total count of Pokémon resources.
-    It then selects random Pokémon IDs and fetches their data until it accumulates the desired number
-    of unique Pokémon.
-
-    :return: A list of dictionaries containing Pokémon data.
+    :return: A list of dictionaries, where each dictionary contains data about a random pokemon.
     """
     pokemons = []
     response = requests.get(URL_POKEMON_API_BASE)
@@ -55,24 +48,22 @@ def get_random_pokemons():
             pokemons.append(pokemon_data)
     return pokemons
 
-# Calculer la force d'un pokémon
 def calculate_pokemon_strength(pokemon):
     """
-    :param pokemon: A dictionary containing details of a Pokemon, including its stats.
+    :param pokemon: A dictionary containing information about a Pokémon, including its stats
     :type pokemon: dict
-    :return: The total strength of the Pokemon, calculated as the sum of its base stats.
+    :return: The total strength of the Pokémon calculated by summing its base stats
     :rtype: int
     """
     stats = pokemon['stats']
     total_strength = sum(stat['base_stat'] for stat in stats)
     return total_strength
 
-# Simuler un combat et déterminer le vainqueur
 def simulate_battle(pokemon1, pokemon2):
     """
-    :param pokemon1: The first Pokémon involved in the battle simulation.
-    :param pokemon2: The second Pokémon involved in the battle simulation.
-    :return: The winning Pokémon based on their calculated strengths. If both have the same strength, a random Pokémon is chosen as the winner.
+    :param pokemon1: The first Pokemon involved in the battle.
+    :param pokemon2: The second Pokemon involved in the battle.
+    :return: The Pokemon that wins the battle, chosen randomly in case of a tie.
     """
     strength1 = calculate_pokemon_strength(pokemon1)
     strength2 = calculate_pokemon_strength(pokemon2)
@@ -84,25 +75,27 @@ def simulate_battle(pokemon1, pokemon2):
     else:
         return random.choice([pokemon1, pokemon2])
 
-# Route principale : Affichage du tournoi
 @app.route('/')
 def index():
     """
-    Handles the root URL and renders the index page.
+    Handles the root URL of the application.
 
-    :return: Rendered HTML of the index page.
+    This route is responsible for initializing a global list of participants
+    by fetching random Pokémon data. It then renders the `index.html` template,
+    passing in the number of participants and the list of Pokémon.
+
+    :return: Rendered HTML for the index page.
     """
     global participants
     participants = get_random_pokemons()
     return render_template('index.html', nbParticipants=NB_PARTICIPANTS, pokemons=participants)
 
-# Route pour démarrer le tournoi
 @app.route('/tournament')
 def tournament():
     """
-    Handles the tournament route which simulates a Pokémon tournament with randomly selected Pokémon.
+    Handles the tournament route, simulating a series of battles between Pokémon participants until a champion is determined.
 
-    :return: A rendered HTML template for the tournament, showing all rounds and the champion.
+    :return: Renders the tournament results page with details of each round and the final champion.
     """
     global participants
     pokemons = participants
