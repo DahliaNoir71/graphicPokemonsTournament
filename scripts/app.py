@@ -8,6 +8,8 @@ BASE_URL_API = "https://pokeapi.co/api/v2/"
 URL_POKEMON_API_BASE = "%spokemon" % BASE_URL_API
 NB_PARTICIPANTS = 16
 
+participants = []
+
 # Récupérer un pokémon aléatoire
 def get_random_pokemon_id(pokemons_count):
     """
@@ -90,8 +92,9 @@ def index():
 
     :return: Rendered HTML of the index page.
     """
-    pokemons = get_random_pokemons()
-    return render_template('index.html', nbParticipants=NB_PARTICIPANTS, pokemons=pokemons)
+    global participants
+    participants = get_random_pokemons()
+    return render_template('index.html', nbParticipants=NB_PARTICIPANTS, pokemons=participants)
 
 # Route pour démarrer le tournoi
 @app.route('/tournament')
