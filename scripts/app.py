@@ -90,7 +90,7 @@ def index():
 
     :return: Rendered HTML of the index page.
     """
-    return render_template('index.html')
+    return render_template('index.html', nbParticipants=NB_PARTICIPANTS)
 
 # Route pour démarrer le tournoi
 @app.route('/tournament')
