@@ -97,7 +97,7 @@ def simulate_tournament(pokemons):
                 'pokemon1_img': pokemon1['sprites']['front_default'],
                 'pokemon2': pokemon2['name'],
                 'pokemon2_img': pokemon2['sprites']['front_default'],
-                'winner': winner['name']
+                'winner': winner['name'],
             })
         rounds.append({
             'round_number': round_num,
