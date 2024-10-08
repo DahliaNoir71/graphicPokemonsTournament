@@ -10,10 +10,18 @@ NB_PARTICIPANTS = 16
 
 # Récupérer un pokémon aléatoire
 def get_random_pokemon_id(pokemons_count):
+    """
+    :param pokemons_count: The total number of available Pokémon, used as the upper bound for generating a random Pokémon ID.
+    :return: A random Pokémon ID within the range of 1 and the given number of Pokémons.
+    """
     return random.randint(1, pokemons_count)
 
 # Récupérer les données d'un pokémon
 def fetch_pokemon_data(pokemon_id):
+    """
+    :param pokemon_id: ID of the Pokémon to fetch data for
+    :return: JSON response containing Pokémon data if successful, None otherwise
+    """
     try:
         url_pokemon = f"{URL_POKEMON_API_BASE}/{pokemon_id}"
         response = requests.get(url_pokemon)
@@ -25,6 +33,15 @@ def fetch_pokemon_data(pokemon_id):
 
 # Obtenir une liste de pokémons aléatoires
 def get_random_pokemons():
+    """
+    Fetches a list of random Pokémon data from the Pokémon API.
+
+    The function makes a request to the Pokémon API to retrieve the total count of Pokémon resources.
+    It then selects random Pokémon IDs and fetches their data until it accumulates the desired number
+    of unique Pokémon.
+
+    :return: A list of dictionaries containing Pokémon data.
+    """
     pokemons = []
     response = requests.get(URL_POKEMON_API_BASE)
     pokemons_count = response.json()["count"]
@@ -38,12 +55,23 @@ def get_random_pokemons():
 
 # Calculer la force d'un pokémon
 def calculate_pokemon_strength(pokemon):
+    """
+    :param pokemon: A dictionary containing details of a Pokemon, including its stats.
+    :type pokemon: dict
+    :return: The total strength of the Pokemon, calculated as the sum of its base stats.
+    :rtype: int
+    """
     stats = pokemon['stats']
     total_strength = sum(stat['base_stat'] for stat in stats)
     return total_strength
 
 # Simuler un combat et déterminer le vainqueur
 def simulate_battle(pokemon1, pokemon2):
+    """
+    :param pokemon1: The first Pokémon involved in the battle simulation.
+    :param pokemon2: The second Pokémon involved in the battle simulation.
+    :return: The winning Pokémon based on their calculated strengths. If both have the same strength, a random Pokémon is chosen as the winner.
+    """
     strength1 = calculate_pokemon_strength(pokemon1)
     strength2 = calculate_pokemon_strength(pokemon2)
 
@@ -57,11 +85,21 @@ def simulate_battle(pokemon1, pokemon2):
 # Route principale : Affichage du tournoi
 @app.route('/')
 def index():
+    """
+    Handles the root URL and renders the index page.
+
+    :return: Rendered HTML of the index page.
+    """
     return render_template('index.html')
 
 # Route pour démarrer le tournoi
 @app.route('/tournament')
 def tournament():
+    """
+    Handles the tournament route which simulates a Pokémon tournament with randomly selected Pokémon.
+
+    :return: A rendered HTML template for the tournament, showing all rounds and the champion.
+    """
     pokemons = get_random_pokemons()  # Obtenons les Pokémon aléatoires
     rounds = []
     round_number = 1
