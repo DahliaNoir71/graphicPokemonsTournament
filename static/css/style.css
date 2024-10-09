@@ -5,9 +5,9 @@ body {
     color: #f0f0f0;
     padding: 0;
 }
+
 html {
     background-color: #1e1e1e;
-
 }
 
 /* Styling for the headers with better readability on a dark background */
@@ -15,87 +15,86 @@ h1, h2, h3, h4, h5, h6 {
     color: #f0f0f0;
     font-weight: bold;
 }
+
 h3 {
-    color:#666;
+    color: #666;
     font-weight: normal;
 }
 
 /* Style pour les titres H1 */
 h1 {
-    font-family: 'Poppins', sans-serif; /* Police moderne et élégante */
+    font-family: 'Poppins', sans-serif;
     font-size: 36px;
-    background: linear-gradient(to right, #ff7f50, #ff4500); /* Dégradé de couleurs */
+    background: linear-gradient(to right, #ff7f50, #ff4500);
     color: transparent;
     background-clip: text;
-    -webkit-background-clip: text; /* Pour Chrome/Safari */
+    -webkit-background-clip: text;
     text-align: center;
-    text-transform: uppercase; /* Mettre tout en majuscules */
-    letter-spacing: 2px; /* Espacement des lettres pour plus d'impact */
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); /* Ombre portée légère */
-    margin-bottom: 20px; /* Espacement avec le reste du contenu */
-    animation: fadeIn 1s ease-in-out; /* Effet d'apparition en fondu */
-    padding:20px 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease-in-out;
+    padding: 20px 0;
 }
 
 /* Animation d'apparition en fondu */
 @keyframes fadeIn {
     0% {
         opacity: 0;
-        transform: translateY(-20px); /* Part de plus haut */
+        transform: translateY(-20px);
     }
     100% {
         opacity: 1;
-        transform: translateY(0); /* Arrive à sa position finale */
+        transform: translateY(0);
     }
 }
-
 
 p {
     color: #f0f0f0;
 }
 
-.fa-bolt{
-    font-size:30px;
+.fa-bolt {
+    font-size: 30px;
     color: yellow;
 }
 
 .card .fa-trophy {
-    margin-top:50px;
-    color:#fff;
-    font-size:50px;
+    margin-top: 50px;
+    color: #fff;
+    font-size: 50px;
 }
 
 .trophy-icon {
-    font-size:100px !important;
-    display:block;
+    font-size: 100px !important;
+    display: block;
 }
 
 header {
-    padding:0 !important;
+    padding: 0 !important;
 }
-header .img {
-    width:100%;
-    height:auto;
+
+/* Adjusted path for the banner image to work with Flask's static folder */
+.banner {
+    background: url("/static/img/banner.png") no-repeat center center;
+    background-size: 100% auto;
+    width: 100%;
+    height: 200px;
 }
 
 main {
-    padding:0 !important;
+    padding: 0 !important;
 }
+
 article {
     background-color: #1e1e1e;
     padding: 0;
-    margin:0;
+    margin: 0;
 }
+
 footer {
-
 }
 
-.banner {
-    background:url("/static/img/banner.png") no-repeat center center;
-    background-size:100% auto;
-    width:100%;
-    height:200px;
-}
 /* Flexbox grid for Pokémon list */
 .grid {
     display: flex;
@@ -105,7 +104,7 @@ footer {
 }
 
 .card {
-    overflow:hidden;
+    overflow: hidden;
 }
 
 /* Styling each Pokémon card */
@@ -114,7 +113,7 @@ footer {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 20px;
-    min-width:20vw;
+    min-width: 20vw;
     text-align: center;
 }
 
@@ -127,29 +126,29 @@ footer {
 }
 
 button {
-    max-width:400px;
+    max-width: 400px;
 }
 
 /* Flexbox container for the Pokémon images and "VS" text */
 .pokemon-battle {
     display: flex;
-    justify-content: space-around; /* Space out the two Pokémon images */
-    align-items: center; /* Center the "VS" text vertically */
-    gap: 20px; /* Add some spacing between the images and the "VS" text */
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
 }
 
 /* Style for the "VS" text */
 .vs-text {
     font-size: 18px;
-    color: #666; /* A color that pops */
-    margin: 0; /* Remove any margin to keep it centered */
+    color: #666;
+    margin: 0;
 }
 
 /* Centrer la pagination */
 .pagination {
     display: flex;
     justify-content: center;
-    gap: 15px; /* Espacement entre les boutons */
+    gap: 15px;
     margin-top: 30px;
 }
 
@@ -159,16 +158,16 @@ button {
     color: white;
     border: none;
     padding: 10px 20px;
-    border-radius: 30px; /* Boutons arrondis */
+    border-radius: 30px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Animation fluide */
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 /* Changer la couleur au survol */
 .pagination button:hover:not(:disabled) {
     background-color: #e75432;
-    transform: translateY(-3px); /* Légère élévation */
+    transform: translateY(-3px);
 }
 
 /* Style des boutons désactivés */
@@ -179,13 +178,10 @@ button {
 
 /* Icône à gauche dans les boutons */
 .pagination button i {
-    margin-right: 10px; /* Espacement entre l'icône et le texte */
+    margin-right: 10px;
 }
 
 .winner {
-    margin:40px;
-    border-radius:20px;
+    margin: 40px;
+    border-radius: 20px;
 }
-
-
-

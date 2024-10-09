@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,28 +8,32 @@
     <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.5.7/css/pico.min.css">
     <!-- Lien vers GSAP via CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <link rel="stylesheet" href="/static/style.css">
+    <!-- Lien vers le fichier de style CSS local, Flask gère cela avec url_for('static', ...) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <header>
         <div class="banner"></div>
         <h1>Liste des Pokémons combattants</h1>
-            <header>
     </header>
 
     <main class="grid">
+        <!-- Boucle sur la liste des pokémons -->
         {% for pokemon in pokemons %}
             <div class="card pokemon-card">
+                <!-- Image du Pokémon -->
                 <img src="{{ pokemon.sprites.front_default }}" alt="{{ pokemon.name }}">
-                <p>{{ pokemon.name }}</p>
+                <!-- Nom du Pokémon -->
+                <p>{{ pokemon.name | capitalize }}</p>
             </div>
         {% endfor %}
     </main>
 
     <footer>
         <div class="pagination">
-            <button onClick="window.location.href='/tournament/1'">Démarrer le Tournoi</button>
-        </div>>
+            <!-- Bouton pour démarrer le tournoi -->
+            <button onClick="window.location.href='{{ url_for('tournament', round_number=1) }}'">Démarrer le Tournoi</button>
+        </div>
     </footer>
 
     <script>
