@@ -1,24 +1,35 @@
-# Fichiers spécifiques à l'environnement de développement
-.vscode/
+# Ignorer tout le dossier .idea
 .idea/
 
-# Fichiers Python compilés
-*.pyc
-__pycache__/
+# Facultatif : Ignorer les fichiers spécifiques de configuration du projet PyCharm
+# Si tu veux conserver certaines configurations, retire-les de cette liste.
 
-# Environnements virtuels
-venv/
-env/
+# Les fichiers XML spécifiques à l'environnement PyCharm
+.idea/*.xml
 
-# Logs et fichiers temporaires
-*.log
-*.tmp
+# Fichier avec les tâches locales et temporaires
+.idea/tasks.xml
 
-# Fichiers générés
-dist/
-build/
-*.egg-info/
+# VCS local
+.idea/vcs.xml
 
-# Configuration spécifique aux systèmes d'exploitation
-.DS_Store
-*.swp
+# Espace de travail de l'utilisateur (fenêtres ouvertes, etc.)
+.idea/workspace.xml
+
+# Répertoires utilisés pour les sauvegardes locales
+.idea/shelf/
+
+# Modules et fichiers de configuration de débogage
+.idea/modules.xml
+.idea/dictionaries/
+.idea/dataSources/
+.idea/dataSources.local.xml
+
+# Fichier d'inspection du code
+.idea/inspectionProfiles/
+
+# Configurations de run/debug (ex. fichiers de configurations pour exécuter le code)
+.idea/runConfigurations/
+
+# Dépendances Python si non suivies
+.idea/venv/
