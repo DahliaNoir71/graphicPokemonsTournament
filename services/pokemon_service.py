@@ -43,3 +43,4 @@ def get_random_pokemons():
             pokemons.append(pokemon_data)
 
     return pokemons
+
